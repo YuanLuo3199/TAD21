@@ -22,6 +22,7 @@ summary(data_corpus_inaugural[1:5])
 data_corpus_inaugural[1]
 cat(data_corpus_inaugural[2])
 
+
 ndoc(data_corpus_inaugural)
 docnames(data_corpus_inaugural)
 
@@ -87,6 +88,7 @@ trimmedInaugDfm <- dfm_trim(inaugDfm, min_docfreq = 5, min_termfreq  = 10)
 weightedTrimmedDfm <- dfm_tfidf(trimmedInaugDfm)
 
 require(magrittr)
+
 inaugDfm2 <- dfm(inaugTokens) %>% 
   dfm_trim(min_docfreq = 5, min_termfreq = 10) %>% 
   dfm_tfidf()
@@ -105,12 +107,13 @@ summary(data_corpus_inaugural[52:57])
 #We can use the `docvars` option to the `corpus` command to record the party with which each text is associated:
   
 dv <- data.frame(Party = c('dem', 'dem', 'rep', 'rep', 'dem', 'dem'))
+
 recentCorpus <- corpus(data_corpus_inaugural[52:57], docvars = dv)
+
 summary(recentCorpus)
 
 #We can use this metadata to combine features across documents when creating a document-feature matrix:
 
 partyDfm <- dfm(recentCorpus, groups = 'Party', remove = (stopwords('english')))
-plot(partyDfm, comparison = TRUE)
 
                 
